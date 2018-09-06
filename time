@@ -1,0 +1,7 @@
+#时间同步
+1. 安装ntpdate
+sudo apt-get install ntpdate
+2. 设置和网络同步
+nepdate cn.pool.ntp.org
+3. 写入硬件时间
+sudo hwclock --localtime --systohc

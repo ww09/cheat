@@ -1,0 +1,8 @@
+1. 将本地仓库设置为裸仓库.
+git clone --bare my_project my_project.git
+2. 将裸仓库复制到远端.
+scp -r my_project.git user@git.example.com:/opt/git
+3. 从远端通过SSH协议复制.
+git clone user@git.example.com:/opt/git/my_project.git
+4. 需要设置ssh用户对/opt/git有读写权限
+sudo chmod -R 777 /opt/git/

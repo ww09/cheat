@@ -1,0 +1,5 @@
+Other helpful commands from tty (alt + ctrl + f2) that should not close all your apps but just reload gnome-shell instead:
+killall -1 gnome-shell
+(you may need to replace number 1 with 3 but I personally tested 1 and worked perfectly – reloaded frozen gnome-shell without closing all apps) or
+DISPLAY=:0 gnome-shell --replace
+(you may need to replace number 0 with 6 or 7)

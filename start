@@ -1,0 +1,3 @@
+桌面版本使用 "startup aplication配置"
+一般直接写命令即可.特殊的可以写脚本."bash -c 'sleep 3 && /usr/bin/wallch --start'" "sh "/home/ww09/.conky/conky-startup.sh""
+

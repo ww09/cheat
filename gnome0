@@ -1,0 +1,48 @@
+h1. Keyboard Shortcuts - GNOME Shell 3.8+
+
+h3. General Navigation
+
+| *Super* or *Alt + F1* or *Super + S* | Activities Overview |
+| *Alt + F2* | Command window |
+| *Super + A* | Application View |
+| *Super + M* | Toggle Message Tray |
+| *Super + N* | Focus Notification |
+| *Ctrl + Alt + Tab* | Toggle System Focus (Windows, Top Bar, Messages) |
+| *Alt + Esc* | Cycle Windows on Current Workspace |
+| *Super [+ Shift] + Tab* | Next [Previous] Application |
+| *Alt [+ Shift] + Tab* | Next [Previous] Application |
+| *Super [+ Shift] + Backtick* | Next [Previous] Window of Current Application |
+| *Alt [+ Shift] + Backtick* or *Alt + F6* | Next [Previous] Window of Current Application |
+| *Super + D* or *Ctrl+Alt+D* | Toggle Desktop |
+| *Super F10* | Application Menu |
+| *Ctrl + Alt + Del* | Log out |
+
+h3. Window Management
+
+| *Super + Up* or *Alt + F10* | Maximize Current Window |
+| *Super + Down* or *Alt + F5* | Restore/Unmaximize Current Window |
+| *Super + Left\Right* | Maximize current window on left\right side of screen |
+| *Alt + F8* | Resize Current Window (using arrow keys) |
+| *Alt + F7* | Move Current Window (using arrow keys) |
+| *Alt + F4* | Close Current Window |
+| *F11* | Maximize current window |
+
+h3. Workspace Navigation
+
+| *Super + PgDown* or *Ctrl+Alt+Down* | Switch to next workspace |
+| *Super + PgUp* or *Ctrl+Alt+Up* | Switch to previous workspace |
+| *Super + Shift + PgDown* or *Ctrl+Alt+Shift+Down* | Move Window and switch to next workspace |
+| *Super + Shift + PgUp* or *Ctrl+Alt+Shift+Up* | Move Window and switch to privous workspace |
+
+h3. Accessibility
+
+| *Ctrl + Alt + Shift + R* | Start screen recorder |
+| *Super + Space* | Switch keyboard input |
+| *PrtScrn* | Take image of screen |
+| *Alt + PrtScrn* | Take image of current window |
+| *Shift + PrtScrn* | Take image of screen area |
+
+h3. Other Useful Commands
+
+Type 'r' in command window (Alt+F2) to restart GNOME Shell.
+Type 'rt' in command window (Alt+F2) to reload GNOME Shell theme.

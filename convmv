@@ -1,0 +1,3 @@
+#conver enconding 文件转码gbk->utf8
+convmv -f gbk -t utf8 --notest --nosmart
+

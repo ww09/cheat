@@ -1,0 +1,9 @@
+
+安装  
+#update-alternatives --install /usr/bin/java java /home/server/jdk1.6.0_21/bin/java 300  
+  
+查询  
+#update-alternatives --display java  
+  
+删除  
+#update-alternatives --remove java  /home/server/jdk1.6.0_21/bin/java  

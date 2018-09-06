@@ -1,0 +1,40 @@
+# 安装
+git clone https://github.com/rofl0r/proxychains-ng
+./configure --prefix=/usr --sysconfdir=/etc
+make 
+make install
+make install-config
+
+# 配置
+/etc/proxychains.config
+
+dynamic_chain
+chain_len = 1 #round_robin_chain和random_chain使用
+proxy_dns 
+remote_dns_subnet 224
+tcp_read_time_out 15000
+tcp_connect_time_out 8000
+[ProxyList]
+socks5     socks5.52os.net 1080
+socks4     socks4.52os.net 1081
+http     http.52os.net   3128
+
+
+dynamic_chain ：动态模式,按照代理列表顺序自动选取可用代理
+strict_chain ：严格模式,严格按照代理列表顺序使用代理，所有代理必须可用
+round_robin_chain ：轮询模式，自动跳过不可用代理
+random_chain ：随机模式,随机使用代理 
+
+# 使用
+proxychains4 程序 参数
+proxychains4 curl -I www.sina.com
+sudo proxychains4 apt-get update
+
+
+# 通过服务器连接外网
+ssh -Nf -D 20002 root@10.190.48.88
+netstat -ntlp
+
+/etc/proxychains.config
+[ProxyList]
+socks5  127.0.0.1 20002

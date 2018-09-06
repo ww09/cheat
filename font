@@ -1,0 +1,13 @@
+# install font for all user
+sudo cp -r ubuntu-font-family-0.80/ /usr/share/fonts/truetype/
+
+sudo chmod 755 /usr/share/fonts/truetype/ubuntu-font-family-0.80/ -R
+
+fc-cache -f -v
+
+# install font all current user
+mkdir ~/.fonts
+cp -r ubuntu-font-family-0.80/ ~/.fonts/
+fc-cache -f -v
+
+

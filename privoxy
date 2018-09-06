@@ -1,0 +1,63 @@
+使用privoxy搭建内网Http代理
+1. 安装Privoxy:
+直接软件源安装即可.配置文件目录:/etc/privoxy.
+
+2. 配置监听地址:
+修改主配置文件config,将默认的绑定地址127.0.0.1修改为0.0.0.0
+listen-address  0.0.0.0:8118
+
+3. 配置默认http转发规则:
+forward  target_pattern  http_proxy:port
+　　语法解释：
+　　该命令分3段，各段之间用空格分开（可以用单个空格，也可以多个空格）
+　　第1段的 forward 是固定的，表示：这是 HTTP 转发
+　　第2段的 target_pattern 是个变量，表示：这次转发只针对特定模式的 HTTP 访问目标
+　　第3段的 http_proxy:port 也是变量，表示：要转发给某个 HTTP 代理（IP 冒号 端口）。如果“第3段”只写一个单独的小数点，表示直连（不走代理）
+
+默认转发规则:forward / .
+如果要使用lantern翻墙软件,需要配置转发规则:forward / 127.0.0.1:port
+(lantern的转发端口和用户绑定,需要在lantern的UI界面上查看)
+
+4. 配置SOCK代理转发规则:
+示意图1（先转发到 SOCKS 代理，然后转到目标站）
+　　　｜＝＝＝＝＞｜　　　　　　　｜＝＝＝＝＞｜　　　　　　　｜＝＝＝＝＞｜
+浏览器｜　　　　　｜Ｐｒｉｖｏｘｙ｜　　　　　｜ＳＯＣＫＳ代理｜　　　　　｜目标网站
+　　　｜＜＝＝＝＝｜　　　　　　　｜＜＝＝＝＝｜　　　　　　　｜＜＝＝＝＝｜
+　　　｜此阶段是　｜　　　　　　　｜此阶段是　｜　　　　　　　｜此阶段是　｜
+　　　｜ＨＴＴＰ　｜　　　　　　　｜ＳＯＣＫＳ｜　　　　　　　｜ＨＴＴＰ　｜
+
+示意图2（先转发到 SOCKS 代理，再转发到某个 HTTP 代理，最后才转到目标站）
+　　　｜＝＝＝＝＞｜　　　　　　　｜＝＝＝＝＞｜　　　　　　　｜＝＝＝＝＞｜　　　　　　｜＝＝＝＝＞｜
+浏览器｜　　　　　｜Ｐｒｉｖｏｘｙ｜　　　　　｜ＳＯＣＫＳ代理｜　　　　　｜ＨＴＴＰ代理｜　　　　　｜目标网站
+　　　｜＜＝＝＝＝｜　　　　　　　｜＜＝＝＝＝｜　　　　　　　｜＜＝＝＝＝｜　　　　　　｜＜＝＝＝＝｜
+　　　｜此阶段是　｜　　　　　　　｜此阶段是　｜　　　　　　　｜此阶段是　｜　　　　　　｜此阶段是　｜
+　　　｜ＨＴＴＰ　｜　　　　　　　｜ＳＯＣＫＳ｜　　　　　　　｜ＨＴＴＰ　｜　　　　　　｜ＨＴＴＰ　｜
+
+forward-socks4   target_pattern  socks_proxy:port  http_proxy:port
+forward-socks4a  target_pattern  socks_proxy:port  http_proxy:port
+forward-socks5   target_pattern  socks_proxy:port  http_proxy:port
+forward-socks5t  target_pattern  socks_proxy:port  http_proxy:port
+
+语法解释：
+　　该命令分4段，各段之间用空格分开（可以用单个空格，也可以多个空格）
+　　第1段是以 forward 开头的，表示 SOCKS 转发的类型。目前支持 4 种类型。
+	前面3种（forward-socks4 forward-socks4a forward-socks5）分别对应不同版本的 SOCKS 协议。
+	最后一种 forward-socks5t 比较特殊，是基于 SOCKS5 协议版本，但是加入针对 TOR 的扩展支持（优化了性能）。
+	只有转发给 TOR 的 SOCKS 代理，才需要用这个类型。
+　　第2段的 target_pattern 是个变量，表示：这次转发只针对特定模式的 HTTP 访问目标
+　　第3段的 socks_proxy:port 也是变量，表示：要转发给某个 SOCKS 代理（IP 冒号 端口）
+　　第4段的 http_proxy:port 也是变量，表示：在经由前面的 SOCKS 代理之后，再转发给某个 HTTP 代理（IP 冒号 端口）
+	第4段如果写成一个单独的小数点，相当于“示意图1”；如果第4段填写了具体的 IP 和端口，相当于“示意图2”
+
+5. 启动软件
+sudo privoxy /etc/privoxy/config
+出现没有使用sudo 权限,无法启动情况
+ss -ntlp 查看监听端口 
+
+6. 系统自启动
+使用界面startup Application,配置开机启动 /usr/bin/privoxy /etc/privoxy/config
+使用systemd 配置开机启动。
+参考文档
+http://www.privoxy.org/user-manual/
+https://qunwang6.github.io/blog/Privoxy/
+
